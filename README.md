@@ -1,7 +1,7 @@
 
 # Estrutura básica do trabalho de CSB30 - Introdução A Bancos De Dados
 
-Modifique este aquivo README.md com as informações dequadas sobre o seu grupo.
+Modifique este aquivo README.md com as informações adequadas sobre o seu grupo.
 
 ## Integrantes do grupo
 
@@ -13,4 +13,4 @@ Liste o nome, RA e o usuário GitLab para cada integrante do grupo.
 
 ## Descrição da aplicação a ser desenvolvida 
 
-Descreva aqui uma visão geral da aplicação que será desenvolvida pelo grupo durante o semestre. **Este texto deverá ser escrito quando requisitado pelo professor.** O conteúdo vai evoluir a medida em que o grupo avança com a implementação.
+Descreva aqui uma visão geral da aplicação que será desenvolvida pelo grupo durante o semestre. **Este texto deverá ser escrito quando requisitado pelo professor.** O conteúdo vai evoluir à medida em que o grupo avança com a implementação.
