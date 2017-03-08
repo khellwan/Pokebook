@@ -1,16 +1,14 @@
+# Estrutura b√°sica do trabalho de CSB30 - Introdu√ß√£o A Bancos De Dados
 
-# Estrutura b·sica do trabalho de CSB30 - IntroduÁ„o A Bancos De Dados
-
-Modifique este aquivo README.md com as informaÁıes adequadas sobre o seu grupo.
+Modifique este aquivo README.md com as informa√ß√µes adequadas sobre o seu grupo.
 
 ## Integrantes do grupo
 
-Liste o nome, RA e o usu·rio GitLab para cada integrante do grupo.
 
-- Nome do integrante 1, RA do integrante 1, usu·rio GitLab do integrante 1
-- Nome do integrante 2, RA do integrante 2, usu·rio GitLab do integrante 2
-- Nome do integrante 3, RA do integrante 3, usu·rio GitLab do integrante 3
+- Lucas Kuttner Amin, 1717510, LucasAmin
+- Thiago Oliveira Bispo de Jesus, 1720465, thico10
+- Willian Henrique Siman de Lima, 1717553, SirWillianH
 
-## DescriÁ„o da aplicaÁ„o a ser desenvolvida 
+## Descri√ß√£o da aplica√ß√£o a ser desenvolvida 
 
-Descreva aqui uma vis„o geral da aplicaÁ„o que ser· desenvolvida pelo grupo durante o semestre. **Este texto dever· ser escrito quando requisitado pelo professor.** O conte˙do vai evoluir ‡ medida em que o grupo avanÁa com a implementaÁ„o.
+Descreva aqui uma vis√£o geral da aplica√ß√£o que ser√° desenvolvida pelo grupo durante o semestre. **Este texto dever√° ser escrito quando requisitado pelo professor.** O conte√∫do vai evoluir √† medida em que o grupo avan√ßa com a implementa√ß√£o.
