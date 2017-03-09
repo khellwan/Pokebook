@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<universe name="Marvel Universe">
+        <hero id="1">
+            <name>Spider Man</name>
+            <popularity>1</popularity>
+            <alignment>Good</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>76</weight_kg>
+            <hometown>USA</hometown>
+            <intelligence>4</intelligence>
+            <strength>4</strength>
+            <speed>3</speed>
+            <durability>3</durability>
+            <energy_Projection>1</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="2">
+            <name>Iron Man</name>
+            <popularity>20</popularity>
+            <alignment>Neutral</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>103</weight_kg>
+            <hometown>USA</hometown>
+            <intelligence>6</intelligence>
+            <strength>6</strength>
+            <speed>5</speed>
+            <durability>6</durability>
+            <energy_Projection>6</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="3">
+            <name>Hulk</name>
+            <popularity>18</popularity>
+            <alignment>Neutral</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>635</weight_kg>
+            <hometown>USA</hometown>
+            <intelligence>6</intelligence>
+            <strength>7</strength>
+            <speed>3</speed>
+            <durability>7</durability>
+            <energy_Projection>5</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="4">
+            <name>Wolverine</name>
+            <popularity>3</popularity>
+            <alignment>Good</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>88</weight_kg>
+            <hometown>Canada</hometown>
+            <intelligence>2</intelligence>
+            <strength>4</strength>
+            <speed>2</speed>
+            <durability>4</durability>
+            <energy_Projection>1</energy_Projection>
+            <fighting_Skills>7</fighting_Skills>
+        </hero>
+        <hero id="5">
+            <name>Thor</name>
+            <popularity>5</popularity>
+            <alignment>Good</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>290</weight_kg>
+            <hometown>Norway</hometown>
+            <intelligence>2</intelligence>
+            <strength>7</strength>
+            <speed>7</speed>
+            <durability>6</durability>
+            <energy_Projection>6</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="6">
+            <name>Green Goblin</name>
+            <popularity>91</popularity>
+            <alignment>Bad</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>175</weight_kg>
+            <hometown>USA</hometown>
+            <intelligence>4</intelligence>
+            <strength>4</strength>
+            <speed>3</speed>
+            <durability>4</durability>
+            <energy_Projection>3</energy_Projection>
+            <fighting_Skills>3</fighting_Skills>
+        </hero>
+        <hero id="7">
+            <name>Magneto</name>
+            <popularity>11</popularity>
+            <alignment>Neutral</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>86</weight_kg>
+            <hometown>Germany</hometown>
+            <intelligence>6</intelligence>
+            <strength>3</strength>
+            <speed>5</speed>
+            <durability>4</durability>
+            <energy_Projection>6</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="8">
+            <name>Thanos</name>
+            <popularity>47</popularity>
+            <alignment>Bad</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>447</weight_kg>
+            <hometown>Titan</hometown>
+            <intelligence>6</intelligence>
+            <strength>7</strength>
+            <speed>7</speed>
+            <durability>6</durability>
+            <energy_Projection>6</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="9">
+            <name>Loki</name>
+            <popularity>32</popularity>
+            <alignment>Bad</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>238</weight_kg>
+            <hometown>Jotunheim</hometown>
+            <intelligence>5</intelligence>
+            <strength>5</strength>
+            <speed>7</speed>
+            <durability>6</durability>
+            <energy_Projection>6</energy_Projection>
+            <fighting_Skills>3</fighting_Skills>
+        </hero>
+        <hero id="10">
+            <name>Doctor Doom</name>
+            <popularity>19</popularity>
+            <alignment>Bad</alignment>
+            <gender>Male</gender>
+            <height_m>2</height_m>
+            <weight_kg>188</weight_kg>
+            <hometown>Latveria</hometown>
+            <intelligence>6</intelligence>
+            <strength>4</strength>
+            <speed>5</speed>
+            <durability>6</durability>
+            <energy_Projection>6</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="11">
+            <name>Jean Greay</name>
+            <popularity>8</popularity>
+            <alignment>Good</alignment>
+            <gender>Female</gender>
+            <height_m>2</height_m>
+            <weight_kg>52</weight_kg>
+            <hometown>USA</hometown>
+            <intelligence>3</intelligence>
+            <strength>2</strength>
+            <speed>7</speed>
+            <durability>7</durability>
+            <energy_Projection>7</energy_Projection>
+            <fighting_Skills>4</fighting_Skills>
+        </hero>
+        <hero id="12">
+            <name>Rogue</name>
+            <popularity>4</popularity>
+            <alignment>Good</alignment>
+            <gender>Female</gender>
+            <height_m>2</height_m>
+            <weight_kg>54</weight_kg>
+            <hometown>USA</hometown>
+            <intelligence>7</intelligence>
+            <strength>7</strength>
+            <speed>7</speed>
+            <durability>7</durability>
+            <energy_Projection>7</energy_Projection>
+            <fighting_Skills>7</fighting_Skills>
+        </hero>
+</universe>
