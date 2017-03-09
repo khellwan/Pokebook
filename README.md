@@ -1,6 +1,5 @@
-# Estrutura básica do trabalho de CSB30 - Introdução A Bancos De Dados
+# Equipe Fire Inácio
 
-Modifique este aquivo README.md com as informações adequadas sobre o seu grupo.
 
 ## Integrantes do grupo
 
