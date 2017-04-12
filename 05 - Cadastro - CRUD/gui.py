@@ -164,9 +164,9 @@ class Cadastrar(tk.Frame):
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
                 self.text.config(state="normal")
                 self.text.delete(1.0, tk.END)
-		login_cabra = self.entry_login.get()
-		if login_cabra == "":
-			login_cabra = None
+                login_cabra = self.entry_login.get()
+                if login_cabra == "":
+                        login_cabra = None
                 try:
                                 cur.execute("INSERT INTO pessoa VALUES (%s,%s,%s);", (self.entry_cidade.get(), self.entry_nome.get(), login_cabra))
                                 self.text.insert(tk.END, "Usuário cadastrado com sucesso.\n")
