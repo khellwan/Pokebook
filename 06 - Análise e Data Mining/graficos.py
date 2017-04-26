@@ -3,8 +3,6 @@
 
 import psycopg2
 import psycopg2.extras
-import os
-import urllib
 import Tkinter as tk
 import matplotlib
 matplotlib.use("TkAgg")
@@ -23,55 +21,8 @@ except:
 
 cur = conn.cursor()
 
-#Acesso ao banco de dados
-
-#Inicio do Loop
 TITLE_FONT = ("Helvetica", 18, "bold")
 
-class SampleApp(tk.Tk):
-    def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
-        self.wm_title("Interface CRUD")
-
-        # the container is where we'll stack a bunch of frames
-        # on top of each other, then the one we want visible
-        # will be raised above the others
-        container = tk.Frame(self)
-        container.pack(side="top", fill="both", expand=True)
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
-
-        self.frames = {}
-        for F in (StartPage, Graficos):
-            page_name = F.__name__
-            frame = F(parent=container, controller=self)
-            self.frames[page_name] = frame
-
-            # put all of the pages in the same location;
-            # the one on the top of the stacking order
-            # will be the one that is visible.
-            frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame("StartPage")
-
-    def show_frame(self, page_name):
-        '''Show a frame for the given page name'''
-        frame = self.frames[page_name]
-        frame.tkraise()
-
-
-class StartPage(tk.Frame):
-
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-
-        self.controller = controller
-        
-        label = tk.Label(self, text="Data Mining", font=TITLE_FONT)        
-        button1 = tk.Button(self, text="Gráficos", command=lambda: controller.show_frame("Graficos"))
-
-        label.pack(side="top", fill="x", pady=10)
-        button1.pack()
 
 class Graficos(tk.Frame):
     def __init__(self, parent, controller):
@@ -151,8 +102,3 @@ class Graficos(tk.Frame):
         a_filme.set_ylabel('N filmes', fontsize=8)
         a_filme.plot(range(len(d_pessoa)+1),plot_filme)
 
-if __name__ == "__main__":
-    app = SampleApp()
-    app.mainloop()
-
-#Final do Loop
