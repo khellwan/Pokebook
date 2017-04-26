@@ -25,8 +25,9 @@ class Extras(tk.Frame):
 		self.controller = controller
 		
 		label = tk.Label(self, text="Extras", font=TITLE_FONT)
-		info = tk.Label(self, text="Pessoas que mais compartilham artistas curtidos               -- Pessoa que mais possui conhecido")
+		info = tk.Label(self, text="Pessoas que mais compartilham artistas curtidos         |         Pessoa que mais possui conhecido")
 		self.text = tk.Text(self, height=15, width=60, state="disabled")  
+		self.text2 = tk.Text(self, height=15, width=60, state="disabled") 
 		button_menu = tk.Button(self, text="Voltar para o menu principal",
 		                                   command=lambda: controller.show_frame("StartPage"))                         
 	
@@ -36,6 +37,7 @@ class Extras(tk.Frame):
 		button_menu.pack(side="bottom")
 
 		self.text.pack(side="right", fill="both", expand=True)
+		self.text2.pack(side="right", fill="both", expand=True)
 		
 		self.extras_db()
 		
@@ -45,6 +47,8 @@ class Extras(tk.Frame):
 
                 self.text.config(state="normal")
                 self.text.delete(1.0, tk.END)
+		self.text2.config(state="normal")
+                self.text2.delete(1.0, tk.END)
 
 		''' Pessoas que mais compartilham curtidas de musicas ''' 
 
@@ -58,7 +62,7 @@ class Extras(tk.Frame):
 			if row['n_state'] >= maior:
 				maior = row['n_state']			
 				if (row['curtidor1'] not in curtidores2) and (row['curtidor2'] not in curtidores1):						
-					self.text.insert(tk.END, ("Os conhecidos que mais compartilham número de artistas são '%s' e '%s' que compartilham '%s' artistas.\n\n" % (row['curtidor1'].replace("http://utfpr.edu.br/CSB30/2017/1/", ""), row['curtidor2'].replace("http://utfpr.edu.br/CSB30/2017/1/", ""), row['n_state'])))
+					self.text2.insert(tk.END, ("Os conhecidos que mais compartilham número de artistas são '%s' e '%s' que compartilham '%s' artistas.\n\n" % (row['curtidor1'].replace("http://utfpr.edu.br/CSB30/2017/1/", ""), row['curtidor2'].replace("http://utfpr.edu.br/CSB30/2017/1/", ""), row['n_state'])))
 					curtidores1.append(row['curtidor1'])
 					curtidores2.append(row['curtidor2'])
 		
@@ -66,12 +70,12 @@ class Extras(tk.Frame):
 		maior = 0
 		cur.execute("SELECT login_registrador AS Conhecedor, count(*) AS n_state FROM registra GROUP BY Conhecedor ORDER BY n_state DESC")
 		conn.commit()	
-		cur.execute("SELECT * FROM ConheceNormalizada")
 		rows = cur.fetchall()
 		for row in rows:
 			if row['n_state'] >= maior:
 				maior = row['n_state']	
-				self.text.insert(tk.END, ("A pessoa que mais possui conhecido é '%s' e possui '%s' conhecidos. " % (row['curtidor1'].replace("http://utfpr.edu.br/CSB30/2017/1/", ""), row['n_state'])))
-
+				self.text.insert(tk.END, ("A pessoa que mais possui conhecidos é '%s' e possui '%s' conhecidos. " % (row['conhecedor'].replace("http://utfpr.edu.br/CSB30/2017/1/", ""), row['n_state'])))
+		
+		self.text2.config(state="disabled")		
                 self.text.config(state="disabled")		
 
