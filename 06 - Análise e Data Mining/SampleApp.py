@@ -27,7 +27,7 @@ class SampleApp(tk.Tk):
 
         def __init__(self, *args, **kwargs):
 	        tk.Tk.__init__(self, *args, **kwargs)
-		self.wm_title("Interface CRUD")
+		self.wm_title("Analise e Data Mining")
 
 		# the container is where we'll stack a bunch of frames
 		# on top of each other, then the one we want visible

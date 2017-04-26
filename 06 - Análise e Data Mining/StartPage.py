@@ -15,7 +15,7 @@ class StartPage(tk.Frame):
         
                 self.controller = controller
                 
-                label = tk.Label(self, text="Interface CRUD", font=TITLE_FONT)        
+                label = tk.Label(self, text="Análise e Data Mining", font=TITLE_FONT)        
                 button1 = tk.Button(self, text="View", command=lambda: controller.show_frame("ConheceNormalizada"))
 		button2 = tk.Button(self, text="Rating", command=lambda: controller.show_frame("Primeiras"))
 		button3 = tk.Button(self, text="Graphics", command=lambda: controller.show_frame("Graficos"))
