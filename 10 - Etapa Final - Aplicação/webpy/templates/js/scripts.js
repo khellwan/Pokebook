@@ -15,6 +15,7 @@
    Table Of Content
    
    1. Preloader
+   1,5. Toggle Glyph
    2. Smooth Scroll
    3. Scroll To Top
    4. Tooltip
@@ -42,7 +43,11 @@
         $(window).load(function () {
             $('.preloader').delay(800).fadeOut('slow');
          });
-		 		
+		 
+	   /* Change when click */
+	    $('#menu-toggle').click(function(){
+		$(this).find('i').toggleClass('glyphicon-plus').toggleClass('glyphicon-minus');
+		});
 		
 		
        /* Smooth Scroll */
