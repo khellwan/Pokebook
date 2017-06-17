@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    
+    <!-- Meta Tag -->
+    <meta charset="UTF-8">
+	
+	<!-- Load Static Files	-->
+	{% load staticfiles %}
+	
+    <!-- Title -->
+	<title>Amigos do Treinador</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Custom styles for this template -->
+	<link href="{% static 'css/jumbotron.css' %}" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon/pokeico.ico' %}">
+    <link rel="apple-touch-icon" sizes="144x144" type="image/x-icon" href="{% static 'images/favicon/pokeico.png' %}">
+    
+    <!-- All CSS Plugins -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/plugin.css' %}">
+    
+    <!-- Main CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    
+    <!-- Google Web Fonts  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700">
+    
+  </head>
+
+ <body>
+
+	
+     
+	 <!-- Preloader Start -->
+     <div class="preloader">
+	   <div class="rounder"></div>
+      </div>
+      <!-- Preloader End -->
+    
+    <div id="main">
+        <div class="container">
+            <div class="row">
+            	
+               
+                 
+                 <!-- About Me (Left Sidebar) Start -->
+                 <div class="col-md-3">
+                    
+                     <div class="my-pic">
+                        <img src="{% static 'images/blog/ash.png' %}" alt="">
+                        <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
+                         <div id="menu" class="collapse">
+                           <ul class="menu-link">
+                               <li><a href="trainer.html">Treinador</a></li>
+                               <li><a href="photos.html">Fotos</a></li>
+                               <li><a href="pokemon.html">Pokémons</a></li>
+                            </ul>
+                         </div>
+                        </div>
+
+                      <div class="my-detail">
+                    	
+                        <div class="white-spacing">
+                            <h1>Treinador</h1>
+                            <span>Ash Ketchum</span>
+                        </div> 
+
+                    </div>
+                </div>
+                <!-- About Me (Left Sidebar) End -->
+                
+
+                 <!-- Friend (Right Sidebar) Start -->
+                 <div class="col-md-9">
+					<div class="row">
+					
+						<!-- Friend 1 -->
+						<div class="col-md-4">
+							<img class="pokemon square" src="{% static 'images/blog/gary.png' %}" alt="">
+							 <div class="my-detail">
+								<div class="white-spacing">
+							<h1>Gary Carvalho</h1>
+							<span>Treinador</span>
+								</div> 
+							 </div>
+						</div>
+						
+						<!-- Friend 2 -->
+						<div class="col-md-4">
+							<img class="pokemon square" src="{% static 'images/blog/brockobama.png' %}" alt="">
+							<div class="my-detail">
+								<div class="white-spacing">
+							<h1>Brock Obama</h1>
+							<span>Treinador</span>
+								</div> 
+							 </div>
+						</div>
+						
+						<!-- Friend 3 -->
+						<div class="col-md-4">
+							<img class="pokemon square" src="{% static 'images/blog/misty.png' %}" alt="">
+							<div class="my-detail">
+								<div class="white-spacing">
+							<h1>Misty</h1>
+							<span>Treinador</span>
+								</div> 
+							 </div>
+						</div>
+					</div>
+				
+					<div class="row">
+					<!-- Friend 4 -->
+					<div class="col-md-4">
+						<img class="pokemon square" src="{% static 'images/blog/trainer.png' %}" alt="">
+						<div class="my-detail">
+							<div class="white-spacing">
+						<h1>Amigo</h1>
+						<span>Treinador</span>
+							</div> 
+						 </div>
+					</div>
+					
+					<!-- Friend 5 -->
+					<div class="col-md-4">
+						<img class="pokemon square" src="{% static 'images/blog/trainer.png' %}" alt="">
+						<div class="my-detail">
+							<div class="white-spacing">
+						<h1>Amigo</h1>
+						<span>Treinador</span>
+							</div> 
+						 </div>
+					</div>
+					
+					<!-- Friend 6 -->
+					<div class="col-md-4">
+						<img class="pokemon square" src="{% static 'images/blog/trainer.png' %}" alt="">
+						<div class="my-detail">
+							<div class="white-spacing">
+						<h1>Amigo</h1>
+						<span>Treinador</span>
+							</div> 
+						 </div>
+					</div>
+					
+					<!-- Load More -->
+					<div class="col-md-12 text-center">
+						<a href="javascript:void(0)" id="load-more-portfolio" class="load-more-button">Mais</a>
+						<div id="portfolio-end-message"></div>
+					</div>
+					
+					</div>
+                     <!-- Friend (Right Sidebar) End -->
+                     
+                       
+                       <!-- Footer Start -->
+                       <div class="col-md-12 page-body margin-top-50 footer">
+                          <footer>
+                          <ul class="menu-link">
+                                <li><a href="index.html">Início</a></li>
+							   <li><a href="trainer.html">Treinador</a></li>
+                               <li><a href="photos.html">Fotos</a></li>
+                               <li><a href="pokemon.html">Pokémons</a></li>
+                          </ul>
+                          </footer>
+                       </div>
+                       <!-- Footer End -->
+                     
+                     
+                  </div>
+                  <!-- Contact (Right Sidebar) End -->
+                
+            </div>
+         </div>
+      </div>
+    
+      
+    
+    
+    
+    <!-- Back to Top Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-long-arrow-up"></i></a>
+    <!-- Back to Top End -->
+    
+    
+    <!-- All Javascript Plugins  -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugin.js' %}"></script>
+    
+    <!-- Main Javascript File  -->
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+
+    
+   </body>
+ </html>
