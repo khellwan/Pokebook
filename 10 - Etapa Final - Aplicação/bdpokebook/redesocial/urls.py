@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^quest.html$', views.quest, name='quest'),
 	url(r'^sign-up.html$', views.sign_up, name='sign-up'),
 	url(r'^trainer.html$', views.trainer, name='trainer'),
+	url(r'^submit$', views.submit, name='submit'),
 ]
