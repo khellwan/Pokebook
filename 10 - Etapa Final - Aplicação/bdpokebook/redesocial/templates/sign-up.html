@@ -36,35 +36,53 @@
 				  Pokébook
 				</h1>
 				
-				<form class="form-signin" role="form">
+				<form action="form_signup" method="post" class="form-signin" role="form">{% csrf_token %}
 					<h3 class="form-signin-heading">Cadastramento</h3>
-			
+					
 					<label for="name" class="cols-sm-2 control-label">Seu Nome</label>
 					<div class="input-group margin-bottom-sm">
 						<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-						<input class="form-control" type="text" placeholder="Nome" required autofocus>
+						<input class="form-control" type="text" name="nome" placeholder="Nome" required autofocus>
 					</div>
 					<label for="name" class="cols-sm-2 control-label">Seu Email</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
-						<input class="form-control" type="text" placeholder="Email" required autofocus>
+						<input class="form-control" type="email" name="email" placeholder="Email" required autofocus>
 					</div>
 					<label for="name" class="cols-sm-2 control-label">Sua Senha</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-unlock-alt fa-fw"></i></span>
-						<input class="form-control" type="password" placeholder="Senha" required autofocus>
+						<input class="form-control" type="password" name="senha" placeholder="Senha" required autofocus>
 					</div>
 					<label for="name" class="cols-sm-2 control-label">Confirme sua Senha</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-unlock-alt fa-fw"></i></span>
-						<input class="form-control" type="password" placeholder="Senha" required autofocus>
+						<input class="form-control" type="password" name="confirma_senha" placeholder="Confirme a senha" required autofocus>
 					</div>
-					
+					<label for="name" class="cols-sm-2 control-label">Cidade</label>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+						<input class="form-control" type="text" name="cidade" placeholder="Cidade" required autofocus>
+					</div>
+					<label for="name" class="cols-sm-2 control-label">Link da Foto de Perfil</label>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
+						<input class="form-control" type="url" name="img_perfil" placeholder="Insira o link da imagem" required autofocus>
+					</div>
+					<center>
+					<div class="input-group">
+						<br><input type="submit" value="Registrar">
+					</div>
+					</center>
 
-					<br><button class="btn btn-lg btn-primary btn-block" type="submit" href="index.html">Registrar</button></br>
+					<!-- <br><button class="btn btn-lg btn-primary btn-block" type="submit" href="index.html">Registrar</button> -->
 					
 					
 				</form>
+				<!--form action="submit" method="post">{% csrf_token %}
+						<input type="text" name="info"><br>
+						<input type="submit" value="Enviar">
+				</form-->
 	
 			</div>
 		</div> 

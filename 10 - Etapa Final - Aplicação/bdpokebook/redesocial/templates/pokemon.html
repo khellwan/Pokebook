@@ -95,75 +95,19 @@
                  <!-- Contact (Right Sidebar) Start -->
                  <div class="col-md-9">
 					<div class="row">
-						<!-- Pokémon 1 -->
+						<!-- Pokémons -->
+						{% for poke in pokemon%}
 						<div class="col-md-4">
-							<img class="pokemon small" src="{% static 'images/blog/pokemon1.png' %}" alt="">
+							<img class="pokemon small" src="{{ poke.img }}" alt="">
 							 <div class="my-detail">
 								<div class="white-spacing">
-							<h1>Toto</h1>
-							<span>Totodile</span>
+							<h1>{{ poke.apelido }}</h1>
+							<span>{{ poke.especie }}</span>
 								</div> 
 							 </div>
 						</div>
+						{% endfor %}
 						
-						<!-- Pokémon 2 -->
-						<div class="col-md-4">
-							<img class="pokemon small" src="{% static 'images/blog/pokemon2.png' %}" alt="">
-							<div class="my-detail">
-								<div class="white-spacing">
-							<h1>Vapy</h1>
-							<span>Vaporeon</span>
-								</div> 
-							 </div>
-						</div>
-						
-						<!-- Pokémon 3 -->
-						<div class="col-md-4">
-							<img class="pokemon small" src="{% static 'images/blog/pokemon3.png' %}" alt="">
-							<div class="my-detail">
-								<div class="white-spacing">
-							<h1>Pikapi</h1>
-							<span>Pikachu</span>
-								</div> 
-							 </div>
-						</div>
-					</div>
-				
-					<div class="row">
-					<!-- Pokémon 4 -->
-					<div class="col-md-4">
-						<img class="pokemon small" src="{% static 'images/blog/pokeball.png' %}" alt="">
-						<div class="my-detail">
-							<div class="white-spacing">
-						<h1>Pokémon</h1>
-						<span>Species</span>
-							</div> 
-						 </div>
-					</div>
-					
-					<!-- Pokémon 5 -->
-					<div class="col-md-4">
-						<img class="pokemon small" src="{% static 'images/blog/pokeball.png' %}" alt="">
-						<div class="my-detail">
-							<div class="white-spacing">
-						<h1>Pokémon</h1>
-						<span>Species</span>
-							</div> 
-						 </div>
-					</div>
-					
-					<!-- Pokémon 6 -->
-					<div class="col-md-4">
-						<img class="pokemon small" src="{% static 'images/blog/pokeball.png' %}" alt="">
-						<div class="my-detail">
-							<div class="white-spacing">
-						<h1>Pokémon</h1>
-						<span>Species</span>
-							</div> 
-						 </div>
-					</div>
-					</div>
-                     
                      
                        
                        <!-- Footer Start -->

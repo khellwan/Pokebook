@@ -38,16 +38,16 @@
 				  Pokébook
 				</h1>
 				
-				<form class="form-signin" role="form">
+				<form action="form_signin" method="post" class="form-signin" role="form">{% csrf_token %}
 					<h3 class="form-signin-heading">Entre com suas informações</h3>
 			
 					<div class="input-group margin-bottom-sm">
 						<span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
-						<input class="form-control" type="text" placeholder="Email" required autofocus>
+						<input class="form-control" type="text" name="email" placeholder="Email" required autofocus>
 					</div>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-unlock-alt fa-fw"></i></span>
-						<input class="form-control" type="password" placeholder="Senha" required autofocus>
+						<input class="form-control" type="password" name="senha" placeholder="Senha" required autofocus>
 					</div>
 			
 					<div>
@@ -60,6 +60,10 @@
 					
 					
 				</form>
+				
+				{% if erro %}
+				<p> <b> {{ erro }} <b> </p>
+				{% endif %}
 				
 				<div class="footer">
 					<strong>Não é cadastrado?</strong><br><a href="sign-up.html"><u> Clique aqui e cadastre-se! </u></a></br>
