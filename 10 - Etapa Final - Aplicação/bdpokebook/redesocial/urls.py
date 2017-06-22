@@ -9,10 +9,6 @@ urlpatterns = [
 	url(r'^quest.html$', views.quest, name='quest'),
 	url(r'^sign-up.html$', views.sign_up, name='sign-up'),
 	url(r'^trainer.html$', views.trainer, name='trainer'),
-<<<<<<< HEAD
 	url(r'^form_signup$', views.form_signup, name='form_signup'),
 	url(r'^form_signin$', views.form_signin, name='form_signin'),
-=======
-	url(r'^submit$', views.submit, name='submit'),
->>>>>>> dd5813c4c2da91cf8db4f88ecbf7fa46acc64801
 ]
