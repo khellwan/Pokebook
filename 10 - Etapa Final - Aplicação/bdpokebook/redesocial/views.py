@@ -3,6 +3,12 @@ from django.http import HttpResponseRedirect
 import pyodbc
 import hashlib
 
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+from django.core.files import File
+import os, sys
+import tensorflow as tf
+
 class acesso_banco():
 	server = 'bispopokebookdb.database.windows.net'
 	database = 'bispopokebookdb'
@@ -107,7 +113,18 @@ def pokemon(request):
 		pokelist.append(pokemon)
 	return render(request, 'pokemon.html', {"range" : range(6), "pokemon" : pokelist})
 
+	
 def quest(request):
+	if request.method == 'POST' and request.FILES['myfile']:
+		myfile = request.FILES['myfile']
+		fs = FileSystemStorage()
+		filename = fs.save(myfile.name, myfile)
+		uploaded_file_url = fs.url(filename)
+		imagem = open(uploaded_file_url, 'rb').read()
+		texto = Classify(imagem)
+		return render(request, 'quest.html', {
+			'uploaded_file_url': uploaded_file_url, 'texto': texto
+		})
 	return render(request, 'quest.html')
 
 def sign_up(request):
@@ -143,5 +160,34 @@ def form_signup(request):
 	trainer.create_trainer(email, nome, md5_senha, md5_confirma_senha, img_perfil, cidade)
 	return render(request, 'index.html', {'sucesso': sucesso})
 	
+def Classify(image_data):
+	os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+	# Loads label file, strips off carriage return
+	label_lines = [line.rstrip() for line 
+					   in open('redesocial/retrained_labels.txt', "rb")]
+
+	# Unpersists graph from file
+	with open('redesocial/retrained_graph.pb', "rb") as f:
+		graph_def = tf.GraphDef()
+		graph_def.ParseFromString(f.read())
+		tf.import_graph_def(graph_def, name='')
+
+	with tf.Session() as sess:
+		# Feed the image_data as input to the graph and get first prediction
+		softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
+		
+		predictions = sess.run(softmax_tensor, \
+				 {'DecodeJpeg/contents:0': image_data})
+		
+		# Sort to show labels of first prediction in order of confidence
+		top_k = predictions[0].argsort()[-len(predictions[0]):][::-1]
+		
+		for node_id in top_k:
+			human_string = label_lines[node_id]
+			score = predictions[0][node_id]
+			return(human_string)
+			print('%s (score = %.5f)' % (human_string, score))
+	return(label_lines[0])
 
 # Create your views here.
