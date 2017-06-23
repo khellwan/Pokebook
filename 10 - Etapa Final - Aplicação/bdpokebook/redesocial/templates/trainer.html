@@ -46,7 +46,7 @@
                  <div class="col-md-3">
                      <div class="my-pic">
 					 
-                        <img src="{% static 'images/blog/ash.png' %}" alt="">
+                        <img src="{{ profile_pic }}" alt="">
                         <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
                          <div id="menu" class="collapse">
                            <ul class="menu-link">
@@ -54,7 +54,6 @@
 							   <!-- Add Friend -->
 							   <li> <a href="#" id="menu-toggle"> <i class="glyphicon glyphicon-plus"> </i></a> </li>
 							   
-							   <li><a href="photos.html">Fotos</a></li>
                                <li><a href="friend.html">Amigos</a></li>
 							   <li><a href="pokemon.html">Pokémons</a></li>
 
@@ -67,7 +66,7 @@
                      <div class="my-detail">
                         <div class="white-spacing">
                             <h1>Treinador</h1>
-                            <span>Ash Ketchum</span>
+                            <span>{{ trainer_name }}</span>
 						</div> 
 					 </div>
                  </div>
@@ -83,19 +82,32 @@
 								<a href="index.html"><i class="glyphicon glyphicon-home"></i></a>
                              </div>
                             
-                            
                             <div class="col-md-12 content-page">
-                            	
+							
                                 <!-- Blog Post Start -->
+								
                                 <div class="col-md-12 blog-post">
-                                    <div class="post-title">
-                                      <a href="trainer.html"><h1>Piquenique no parque com amigos!</h1></a>
-                                    </div>  
-                                    <div class="post-info">
-                                    	<span>23 de Novembro de 2016 / por <a href="#" target="_blank">Ash</a></span>
-                                    </div>  
-                                    <p>Hoje está um solzão! Acho que iremos fazer um piquenique, eu e meus amigos!</p>                          			
+									
+									<form action="post_message" method="post" role="form">{% csrf_token %}
+										<div class="col-md-12 blog-post">
+											<h3 class="form-signin-heading">Escreva uma mensagem:</h3>
+											<textarea class="form-control" type="text" name="msg" placeholder="Escreva uma mensagem:" style="height: 500px"> </textarea>
+											<h3 class="form-signin-heading">Insira a data de hoje:</h3>
+											<input class="form-control" type="date" name="data_atual" placeholder="data">
+											<br><button class="btn btn-lg btn-primary btn-block" type="submit">Postar</button>
+										</div>
+									</form>
+									
+									<form action="old_messages" method="post" role="form">{% csrf_token %}
+										{% for msg in mensagem %}
+										<div class="post-info">
+											<span>{{ data_msg }} / por <a href="#" target="_blank">{{ treinador }}</a></span>
+										</div>  
+										<p>{{ conteudo }}</p>                          			
+										{% endfor %}
+									</form>
                                 </div>
+								
                                 <!-- Blog Post End -->
 
                                 <div class="col-md-12 text-center">
@@ -114,7 +126,6 @@
                           <footer>
                           <ul class="menu-link">
                                <li><a href="index.html">Início</a></li>
-                               <li><a href="photos.html">Fotos</a></li>
 							   <li><a href="friends.html">Amigos</a></li>
                                <li><a href="pokemon.html">Pokémons</a></li>
                             </ul>
