@@ -38,23 +38,19 @@ def old_messages(request):
 	db_msg = classes.acesso_banco()
 	current_trainer = request.session['trainer_id']
 	messages = db_msg.get_msg(current_trainer)
-	datas = db_msg.get_data_msg(current_trainer)
-	for msg in messages:
-		conteudo = messages[msg]
-		data_msg = datas[msg]
-	return render(request, 'trainer.html', {'msg': msg, 'messages' : messages, 'conteudo' : conteudo, 'current_trainer' : current_trainer, 'data_msg' : data_msg})
+	return render(request, 'trainer.html', {'mensagens' : messages})
 	
 def post_message(request):
 	db_msg = classes.acesso_banco()
 	msg = request.POST.get('msg')
 	data_atual = request.POST.get('data_atual')
 	current_trainer = request.session['trainer_id']
-	profile_pic = request.session['profile_pic']
-	trainer_name = request.session['trainer_name']
+	treinador = db_msg.get_trainer(current_trainer)
 	message_id = randint(0, 99999)
 	if (msg != "None"):
-		db_msg.post_msg(message_id, current_trainer, msg, data_atual)
-	return render(request, 'trainer.html', {'profile_pic' : profile_pic, 'trainer_name' : trainer_name})
+		db_msg.post_msg(message_id, current_trainer, msg)
+	messages = db_msg.get_msg(current_trainer)
+	return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
 	
 def quest(request):
 	if request.method == 'POST' and request.FILES['myfile']:
@@ -75,11 +71,9 @@ def sign_up(request):
 def trainer(request):
 	current_trainer = request.session['trainer_id']
 	db_trainer = classes.acesso_banco()
-	profile_pic = db_trainer.get_trainer_pic(current_trainer)
-	request.session['profile_pic'] = profile_pic
-	trainer_name = db_trainer.get_trainer_name(current_trainer)
-	request.session['trainer_name'] = trainer_name
-	return render(request, 'trainer.html', {'profile_pic' : profile_pic, 'trainer_name' : trainer_name})
+	treinador = db_trainer.get_trainer(current_trainer)
+	messages = db_trainer.get_msg(current_trainer)
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages})
 
 def form_signin(request):
 	email = request.POST.get('email')
@@ -87,7 +81,9 @@ def form_signin(request):
 	trainer = classes.acesso_banco()
 	if trainer.login(email, md5_senha):
 		request.session['trainer_id'] = email
-		return render(request, 'trainer.html')
+		treinador = trainer.get_trainer(email)
+		messages = trainer.get_msg(email)
+		return render(request, 'trainer.html', {'treinador':treinador})
 	else:
 		return render(request, 'index.html', {'erro' : "O e-mail ou a senha estão errados"})
 

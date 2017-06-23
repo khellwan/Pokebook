@@ -1,4 +1,8 @@
 import pyodbc
+from django.utils import timezone
+import time
+
+
 
 class acesso_banco():
 	server = 'bispopokebookdb.database.windows.net'
@@ -58,6 +62,13 @@ class acesso_banco():
 			pokemon = acesso_banco.cursor.fetchone()
 		return pokelist
 		
+	def get_trainer(ref, current_trainer):
+		acesso_banco.cursor.execute("SELECT * FROM Treinador WHERE email = '{0}';".format(current_trainer))
+		row = acesso_banco.cursor.fetchone()
+		treinador = Treinador(row[0],row[1],row[3],row[4])
+		acesso_banco.cnxn.commit()
+		return treinador
+	
 	def get_trainer_pic(ref, current_trainer):
 		acesso_banco.cursor.execute("SELECT img_perfil FROM Treinador WHERE email = '{0}';".format(current_trainer))
 		row = acesso_banco.cursor.fetchone()
@@ -73,13 +84,13 @@ class acesso_banco():
 		return trainer_name
 		
 	def get_msg(ref, current_trainer):
-		acesso_banco.cursor.execute("SELECT conteudo FROM Mensagem WHERE login_treinador = {0};".format(current_trainer))
-		mensagem = acesso_banco.cursor.fetchone()
+		acesso_banco.cursor.execute("SELECT * FROM Mensagem WHERE login_treinador = '{0}' ORDER BY data_postagem DESC;".format(current_trainer))
+		mensagem = acesso_banco.cursor.fetchall()
 		acesso_banco.cnxn.commit()
 		msg_list = []
-		while mensagem:
-			msg_list.append(mensagem[0])
-			mensagem = acesso_banco.cursor.fetchone()
+		for m in mensagem:
+			msg = Mensagem(m[0],m[1],m[2],m[3])
+			msg_list.append(msg)
 		return msg_list
 		
 		
@@ -93,7 +104,9 @@ class acesso_banco():
 			data = acesso_banco.cursor.fetchone()
 		return data_list
 		
-	def post_msg(ref, id_msg, login_treinador, conteudo, data):
+	def post_msg(ref, id_msg, login_treinador, conteudo):
+		now = timezone.now()
+		data = now.strftime('%Y-%m-%d %H:%M:%S')
 		print("INSERT INTO Mensagem VALUES ('{0}', '{1}', '{2}', '{3}');".format(id_msg, login_treinador, conteudo, data))
 		acesso_banco.cursor.execute("INSERT INTO Mensagem VALUES ('{0}', '{1}', '{2}', '{3}');".format(id_msg, login_treinador, conteudo, data))
 		acesso_banco.cnxn.commit()
@@ -118,3 +131,10 @@ class Treinador:
 		self.nome=nome
 		self.img_perfil=img_perfil
 		self.cidade=cidade
+		
+class Mensagem:
+	def __init__(self, id_msg, login_treinador, conteudo, data_postagem):
+		self.id_msg=id_msg
+		self.conteudo=conteudo
+		self.login_treinador=login_treinador
+		self.data_postagem=data_postagem
