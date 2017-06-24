@@ -37,7 +37,7 @@
 		<div class="rounder"></div>
     </div>
     <!-- Preloader End -->
-		
+	
 	 <div id="main">
         <div class="container">
             <div class="row">
@@ -47,17 +47,19 @@
                      <div class="my-pic">
 					 
                         <img src="{{ treinador.img_perfil }}" alt="">
-                        <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
-                         <div id="menu" class="collapse">
+                        
                            <ul class="menu-link">
 						   	   <!-- Add Friend -->
-							   <li> <a href="#" id="menu-toggle"> <i class="glyphicon glyphicon-plus"> </i></a> </li>
+							   <li><a href="#" id="menu-toggle"> <i class="glyphicon glyphicon-plus"> </i></a> </li>
                                <li><a href="friends.html">Amigos</a></li>
 							   <li><a href="pokemon.html">Pokémons</a></li>
+							   
+							   <!-- Logout -->
+							   <li><form action="form_signout" method="post" role="form">{% csrf_token %}
+									<button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-log-out"></span> Log out</button>
+							   </form></li>
 
                             </ul>
-							
-                         </div>
 						 
                      </div>
 					  
@@ -65,7 +67,8 @@
                         <div class="white-spacing">
                             <h1>Treinador</h1>
                             <span>{{ treinador.nome }}</span>
-						</div> 
+						</div>
+						
 					 </div>
                  </div>
                 <!-- About Me (Left Sidebar) End -->
@@ -90,8 +93,8 @@
 										<div class="col-md-12 blog-post">
 											<h3 class="form-signin-heading">Escreva uma mensagem:</h3>
 											<textarea class="form-control" type="text" name="msg" placeholder="Escreva uma mensagem:" style="height: 100px"> </textarea>
-											<h3 class="form-signin-heading">Insira a data de hoje:</h3>
-											<input class="form-control" type="date" name="data_atual" placeholder="data">
+											<!-- h3 class="form-signin-heading">Insira a data de hoje:</h3>
+											<input class="form-control" type="date" name="data_atual" placeholder="data"!-->
 											<br><button class="btn btn-lg btn-primary btn-block" type="submit">Postar</button>
 										</div>
 									</form>

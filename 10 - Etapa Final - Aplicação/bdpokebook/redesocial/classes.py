@@ -2,29 +2,15 @@ import pyodbc
 from django.utils import timezone
 import time
 
-
-
 class acesso_banco():
 	server = 'bispopokebookdb.database.windows.net'
 	database = 'bispopokebookdb'
 	username = 'thico10'
 	password = 'LuThiWill9264'
-#	server = 'bdutfpr.database.windows.net'
-#	database = 'bdpokebook'
-#	username = 'Willian1717553'
-#	password = 'Bzxuyu_744'
 	driver= '{ODBC Driver 13 for SQL Server}'
 	cnxn = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
 	cursor = cnxn.cursor()
 	
-	#fazer esse aqui ainda
-	#def get_profile_pic():
-		#cursor.execute("SELECT TOP 20 pc.Name as CategoryName, p.name as ProductName FROM [SalesLT].[ProductCategory] pc JOIN [SalesLT].[Product] p ON pc.productcategoryid = p.productcategoryid")
-		#row = cursor.fetchone()
-		#while row:
-	#		print str(row[0]) + " " + str(row[1])
-	#		row = cursor.fetchone()
-		#return
 	"""	Acho q n vai precisar, mas ta ai se precisar
 	def cnxn_connect():
 		cnxn=pyodbc.connect('DRIVER='+acesso_banco.driver+';PORT=1433;SERVER='+acesso_banco.server+';PORT=1443;DATABASE='+acesso_banco.database+';UID='+acesso_banco.username+';PWD='+ acesso_banco.password)
@@ -51,15 +37,15 @@ class acesso_banco():
 			acesso_banco.cnxn.commit()
 		return
 	
-	def get_pokemons_by_trainer(treinador):
+	def get_pokemons_by_trainer(ref, treinador):
 		print("SELECT * FROM Pokemon WHERE treinador= '{0}'".format(treinador))
-		acesso_banco.cursor.execute("SELECT * FROM Pokemon WHERE treinador= '{0}';".format(treinador))
-		pokemon = acesso_banco.cursor.fetchone()
+		acesso_banco.cursor.execute("SELECT * FROM Pokemon WHERE treinador= '{0}' ORDER BY apelido DESC;".format(treinador))
+		pokemon = acesso_banco.cursor.fetchall()
 		acesso_banco.cnxn.commit()
 		pokelist = []
-		while pokemon:
+		for poke in pokemon:
+			pkmn = Pokemon(poke[0], poke[1], poke[2], poke[3], poke[4], poke[5], poke[6], poke[7]) 
 			pokelist.append(pokemon)
-			pokemon = acesso_banco.cursor.fetchone()
 		return pokelist
 		
 	def get_trainer(ref, current_trainer):
@@ -107,7 +93,7 @@ class acesso_banco():
 	def post_msg(ref, id_msg, login_treinador, conteudo):
 		now = timezone.now()
 		data = now.strftime('%Y-%m-%d %H:%M:%S')
-		print("INSERT INTO Mensagem VALUES ('{0}', '{1}', '{2}', '{3}');".format(id_msg, login_treinador, conteudo, data))
+		#print("INSERT INTO Mensagem VALUES ('{0}', '{1}', '{2}', '{3}');".format(id_msg, login_treinador, conteudo, data))
 		acesso_banco.cursor.execute("INSERT INTO Mensagem VALUES ('{0}', '{1}', '{2}', '{3}');".format(id_msg, login_treinador, conteudo, data))
 		acesso_banco.cnxn.commit()
 		print("Inserido com sucesso!")

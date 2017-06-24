@@ -11,4 +11,5 @@ urlpatterns = [
 	url(r'^post_message$', views.post_message, name='post_message'),
 	url(r'^form_signup$', views.form_signup, name='form_signup'),
 	url(r'^form_signin$', views.form_signin, name='form_signin'),
+	url(r'^form_signout$', views.form_signout, name='form_signout'),
 ]

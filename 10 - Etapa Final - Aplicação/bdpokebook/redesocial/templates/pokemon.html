@@ -51,7 +51,7 @@
 	   <div class="rounder"></div>
       </div>
       <!-- Preloader End -->
-    
+
     <div id="main">
         <div class="container">
             <div class="row">
@@ -62,7 +62,7 @@
                  <div class="col-md-3">
                     
                      <div class="my-pic">
-                        <img src="{% static 'images/blog/ash.png' %}" alt="">
+                        <img src="{{ treinador.img_perfil }}" alt="">
                         <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
                          <div id="menu" class="collapse">
                            <ul class="menu-link">
@@ -83,7 +83,7 @@
                     	
                         <div class="white-spacing">
                             <h1>Treinador</h1>
-                            <span>Ash Ketchum</span>
+                            <span>{{ treinador.nome }}</span>
                         </div> 
 
                     </div>
@@ -95,7 +95,7 @@
                  <div class="col-md-9">
 					<div class="row">
 						<!-- Pokémons -->
-						{% for poke in pokemon%}
+						{% for poke in pokemons %}
 						<div class="col-md-4">
 							<img class="pokemon small" src="{{ poke.img }}" alt="">
 							 <div class="my-detail">

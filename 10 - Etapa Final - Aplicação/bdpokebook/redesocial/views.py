@@ -16,23 +16,13 @@ def index(request):
 def friends(request):
 	return render(request, 'friends.html')
 
-
 def pokemon(request):
-	#trainer = request.session['trainer_id'] tem que definir isso quando o cara logar
-	#pokelist = get_pokemons_by_trainer()
-	pokelist = [] #temporario enquanto n tem as tabelas
-	for i in range(6):
-		apelido = "pokemon" + str(i)
-		especie = "especie" + str(i)
-		tipo = "fire"
-		regiao = "inacio"
-		estado_evolucao = i
-		img = "img" + str(i) + ".com"
-		nivel = i
-		treinador = "ash ketchum"
-		pokemon = Pokemon(apelido, especie, tipo, regiao, estado_evolucao, img, nivel, treinador)
-		pokelist.append(pokemon)
-	return render(request, 'pokemon.html', {"range" : range(6), "pokemon" : pokelist})
+	current_trainer = request.session['trainer_id']
+	db_pokemon = classes.acesso_banco()
+	treinador = db_pokemon.get_trainer(current_trainer)
+	pokemons = db_pokemon.get_pokemons_by_trainer(current_trainer)
+	#pokemon = db_pokemon.get_pokemons_by_trainer(id, especie, treinador, tipo, regiao, img, nivel, apelido)
+	return render(request, 'pokemon.html', {'treinador':treinador, "pokemons" : pokemons})
 
 def old_messages(request):
 	db_msg = classes.acesso_banco()
@@ -47,7 +37,12 @@ def post_message(request):
 	current_trainer = request.session['trainer_id']
 	treinador = db_msg.get_trainer(current_trainer)
 	message_id = randint(0, 99999)
-	if (msg != "None"):
+	print("A mensagem é ")
+	print("'")
+	print(msg)
+	print("'")
+	print(msg != "None ")
+	if (msg):
 		db_msg.post_msg(message_id, current_trainer, msg)
 	messages = db_msg.get_msg(current_trainer)
 	return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
@@ -70,6 +65,8 @@ def sign_up(request):
 
 def trainer(request):
 	current_trainer = request.session['trainer_id']
+	if (current_trainer == None):
+		current_trainer = "none@hotmail.com"
 	db_trainer = classes.acesso_banco()
 	treinador = db_trainer.get_trainer(current_trainer)
 	messages = db_trainer.get_msg(current_trainer)
@@ -95,13 +92,14 @@ def form_signup(request):
 	img_perfil = request.POST.get('img_perfil')
 	cidade = request.POST.get('cidade')
 	sucesso = "Registrado com Sucesso!"
-	#print(cidade)
-	#print(email)
-	#print(nome)
 	trainer = classes.acesso_banco()
-	#print(email, nome, md5_senha, md5_confirma_senha, img_perfil, cidade)
 	trainer.create_trainer(email, nome, md5_senha, md5_confirma_senha, img_perfil, cidade)
 	return render(request, 'index.html', {'sucesso': sucesso})
+	
+def form_signout(request):
+	request.session['trainer_id'] = None
+	print(request.session['trainer_id'])
+	return render(request, 'index.html')
 	
 def Classify(image_data):
 	os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'

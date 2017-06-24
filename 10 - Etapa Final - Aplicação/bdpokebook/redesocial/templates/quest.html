@@ -78,9 +78,9 @@
 
 					{% block content %}
 						<form method="post" enctype="multipart/form-data">
-							{% csrf_token %}
-							<input type="file" name="myfile">
-							<button type="submit">Upload</button>
+							{% csrf_token %}<center>
+							<input type="file" name="myfile"><br>
+							<button class="btn btn-lg btn-primary btn-block" type="submit" style="width: 100px">Upload</button></center><br>
 						</form>
 
 						{% if uploaded_file_url %}
