@@ -55,6 +55,18 @@ class acesso_banco():
 		acesso_banco.cnxn.commit()
 		return treinador
 		
+	def add_friend(ref, login_registrador, login_registrado):
+		acesso_banco.cursor.execute("INSERT INTO Amizades VALUES ('{0}', '{1}');".format(login_registrador, login_registrado))
+		print("Inserido com sucesso!")
+		acesso_banco.cnxn.commit()
+		return
+		
+	def remove_friend(ref, login_registrador, login_registrado):
+		acesso_banco.cursor.execute("DELETE FROM Amizades WHERE login_registrador = '{0}' AND login_registrado = '{1}';".format(login_registrador, login_registrado))
+		print("Removido com sucesso!")
+		acesso_banco.cnxn.commit()
+		return
+		
 	def get_friends(ref, current_trainer):
 		acesso_banco.cursor.execute("SELECT email, nome, img_perfil, cidade FROM Treinador, Amizades WHERE login_registrador='{0}' AND login_registrado = email".format(current_trainer))
 		row = acesso_banco.cursor.fetchall()

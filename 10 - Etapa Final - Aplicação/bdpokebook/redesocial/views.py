@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.core.files import File
+from django.template import Context, loader  
 from . import classes
 import os, sys
 import tensorflow as tf
@@ -45,7 +46,8 @@ def post_message(request):
 	if (msg and msg != " "):
 		db_msg.post_msg(message_id, current_trainer, msg)
 	messages = db_msg.get_msg(current_trainer)
-	return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
+	#return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
+	return HttpResponseRedirect("trainer.html")
 	
 def delete_message(request):
 	db_msg = classes.acesso_banco()
@@ -56,7 +58,8 @@ def delete_message(request):
 	print("The message's ID is: ")
 	print(msg)
 	db_msg.delete_msg(msg)
-	return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
+	#return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
+	return HttpResponseRedirect("trainer.html")	
 	
 def quest(request):
 	if request.method == 'POST' and request.FILES['myfile']:
@@ -74,6 +77,28 @@ def quest(request):
 def sign_up(request):
 	return render(request, 'sign-up.html')
 
+def add_friend(request):
+	login_registrador = request.session['trainer_id']
+	login_registrado = request.POST.get('email')
+	db_trainer = classes.acesso_banco()
+	db_trainer.add_friend(login_registrador, login_registrado)
+	treinador = db_trainer.get_trainer(login_registrado)
+	messages = db_trainer.get_msg(login_registrado)
+	not_friend = False
+	own_account = False
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'not_friend':not_friend})
+	
+def remove_friend(request):
+	login_registrador = request.session['trainer_id']
+	login_registrado = request.POST.get('email')
+	db_trainer = classes.acesso_banco()
+	db_trainer.remove_friend(login_registrador, login_registrado)
+	treinador = db_trainer.get_trainer(login_registrado)
+	messages = db_trainer.get_msg(login_registrado)
+	not_friend = True
+	own_account = False
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'not_friend':not_friend})
+	
 def trainer(request):
 	if (request.method=="GET" and request.GET.get('email')):
 		current_trainer = request.GET.get('email')
@@ -82,9 +107,14 @@ def trainer(request):
 		current_trainer = request.session['trainer_id']
 		own_account = True
 	db_trainer = classes.acesso_banco()
+	amigos = db_trainer.get_friends(current_trainer)
+	if not amigos:
+		not_friend = True
+	else:
+		not_friend = False
 	treinador = db_trainer.get_trainer(current_trainer)
 	messages = db_trainer.get_msg(current_trainer)
-	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account})
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'not_friend':not_friend})
 
 def form_signin(request):
 	email = request.POST.get('email')
@@ -94,7 +124,10 @@ def form_signin(request):
 		request.session['trainer_id'] = email
 		treinador = trainer.get_trainer(email)
 		messages = trainer.get_msg(email)
-		return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages})
+		new_trainer = index(request)
+		template = loader.get_template("trainer.html")
+		return HttpResponseRedirect("trainer.html")
+		#return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages})
 	else:
 		return render(request, 'index.html', {'erro' : "O e-mail ou a senha estão errados"})
 
