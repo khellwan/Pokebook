@@ -103,17 +103,17 @@
 					<div class="row">
 						<h1> Sugestão de amigos <h1>
 						{% for trainer in sugestoes %}
-							<form action="trainer.html" method="get" name="friend">
+							<form action="trainer.html" method="get" name="friend_{{ trainer.login }}">
 								<div class="col-md-4">
-									<img class="pokemon square" src="{{ trainer.img_perfil }}" alt="">
-									 <div class="my-detail">
+									<img class="pokemon square" src="{{ trainer.img_perfil }}" alt="" onClick="document.forms['friend_{{ trainer.login }}'].submit();" style="cursor: pointer;">
+									<div class="my-detail" onClick="document.forms['friend_{{ trainer.login }}'].submit();" style="cursor: pointer;">
 										<div class="white-spacing">
 									<h1>{{ trainer.nome }}</h1>
 									<span>Treinador</span>
 										</div> 
 									 </div>
 								</div>
-								<input name="email" type="hidden" value="{{ trainer.email }}"/>
+								<input name="email" type="hidden" value="{{ trainer.login }}"/>
 							</form>
 						{% endfor %}
 					</div>
@@ -124,8 +124,7 @@
                        <div class="col-md-12 page-body margin-top-50 footer">
                           <footer>
                           <ul class="menu-link">
-                                <li><a href="index.html">Início</a></li>
-								<li><a href="trainer.html">Treinador</a></li>
+								<li><a href="trainer.html">Início</a></li>
 								<li><a href="pokemon.html">Pokémons</a></li>
                           </ul>
                           </footer>

@@ -49,15 +49,20 @@
                         <img src="{{ treinador.img_perfil }}" alt="">
                         
                            <ul class="menu-link">
-						   	   <!-- Add Friend -->
-							   <li><a href="#" id="menu-toggle"> <i class="glyphicon glyphicon-plus"> </i></a> </li>
-                               <li><a href="friends.html">Amigos</a></li>
+						   	   <li><a href="friends.html">Amigos</a></li>
 							   <li><a href="pokemon.html">Pokémons</a></li>
 							   
+							   {% if own_account %}
 							   <!-- Logout -->
 							   <li><form action="form_signout" method="post" role="form">{% csrf_token %}
 									<button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-log-out"></span> Log out</button>
 							   </form></li>
+							   {% else %}
+							   <!-- Add friend -->
+							   <li><form action="add_friend" method="post" role="form">{% csrf_token %}
+									<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Adicionar amigo</button>
+							   </form></li>
+							   {% endif %}
 
                             </ul>
 						 
@@ -80,7 +85,7 @@
                             
                             <div class="sub-title">
                            		<h2>Mensagens</h2>
-								<a href="index.html"><i class="glyphicon glyphicon-home"></i></a>
+								<a href="trainer.html"><i class="glyphicon glyphicon-home"></i></a>
                              </div>
                             
                             <div class="col-md-12 content-page">
@@ -89,6 +94,7 @@
 								
                                 <div class="col-md-12 blog-post">
 									
+									{% if own_account %}
 									<form action="post_message" method="post" role="form">{% csrf_token %}
 										<div class="col-md-12 blog-post">
 											<h3 class="form-signin-heading">Escreva uma mensagem:</h3>
@@ -98,15 +104,19 @@
 											<br><button class="btn btn-lg btn-primary btn-block" type="submit">Postar</button>
 										</div>
 									</form>
+									{% endif %}
 									
 									{% for msg in mensagens %}
 									<div class="post-info">
 										<span>{{ msg.data_postagem }} / por <a href="#" target="_blank">{{ msg.login_treinador }}</a></span>
-										<form action="delete_message" method="post" role="form>
+										{% if own_account %}
+										<form action="delete_message" method="post" role="form" name="{{ msg.id_msg }}">{% csrf_token %}
 											<button type="submit" class="btn btn-danger btn-sm">
 												<span class="glyphicon glyphicon-remove"></span> 
 											</button>
+											<input name="id_msg" type="hidden" value="{{msg.id_msg}}"/>
 										</form>
+										{% endif %}
 									</div>  
 									<p>{{ msg.conteudo }}</p>                          			
 									{% endfor %}
@@ -129,7 +139,7 @@
                        <div class="col-md-12 page-body margin-top-50 footer">
                           <footer>
                           <ul class="menu-link">
-                               <li><a href="index.html">Início</a></li>
+                               <li><a href="trainer.html">Início</a></li>
 							   <li><a href="friends.html">Amigos</a></li>
                                <li><a href="pokemon.html">Pokémons</a></li>
                             </ul>

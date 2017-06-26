@@ -49,13 +49,13 @@ def post_message(request):
 	
 def delete_message(request):
 	db_msg = classes.acesso_banco()
-	messages = db_msg.get_msg(current_trainer)
-	msg = messages.conteudo
+	msg = request.POST.get('id_msg')
 	current_trainer = request.session['trainer_id']
 	treinador = db_msg.get_trainer(current_trainer)
-	print("The message is: ")
+	messages = db_msg.get_msg(current_trainer)
+	print("The message's ID is: ")
 	print(msg)
-	db_msg.delete_msg(current_trainer, msg)
+	db_msg.delete_msg(msg)
 	return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
 	
 def quest(request):
@@ -75,14 +75,16 @@ def sign_up(request):
 	return render(request, 'sign-up.html')
 
 def trainer(request):
-	if (request.method=="GET" and request.name=="friend"):
+	if (request.method=="GET" and request.GET.get('email')):
 		current_trainer = request.GET.get('email')
+		own_account = False
 	else:
 		current_trainer = request.session['trainer_id']
+		own_account = True
 	db_trainer = classes.acesso_banco()
 	treinador = db_trainer.get_trainer(current_trainer)
 	messages = db_trainer.get_msg(current_trainer)
-	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages})
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account})
 
 def form_signin(request):
 	email = request.POST.get('email')
