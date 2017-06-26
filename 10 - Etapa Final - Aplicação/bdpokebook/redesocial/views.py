@@ -14,7 +14,12 @@ def index(request):
 	return render(request, 'index.html')
 	
 def friends(request):
-	return render(request, 'friends.html')
+	current_trainer = request.session['trainer_id']
+	db_access = classes.acesso_banco()
+	treinador = db_access.get_trainer(current_trainer)
+	amigos = db_access.get_friends(current_trainer)
+	sugestoes = db_access.get_friend_suggestions(current_trainer)
+	return render(request, 'friends.html', {'treinador':treinador, 'amigos':amigos, 'sugestoes':sugestoes})
 
 def pokemon(request):
 	current_trainer = request.session['trainer_id']
@@ -64,9 +69,10 @@ def sign_up(request):
 	return render(request, 'sign-up.html')
 
 def trainer(request):
-	current_trainer = request.session['trainer_id']
-	if (current_trainer == None):
-		current_trainer = "none@hotmail.com"
+	if (request.method=="GET" and request.name=="friend"):
+		current_trainer = request.GET.get('email')
+	else:
+		current_trainer = request.session['trainer_id']	
 	db_trainer = classes.acesso_banco()
 	treinador = db_trainer.get_trainer(current_trainer)
 	messages = db_trainer.get_msg(current_trainer)
@@ -80,7 +86,7 @@ def form_signin(request):
 		request.session['trainer_id'] = email
 		treinador = trainer.get_trainer(email)
 		messages = trainer.get_msg(email)
-		return render(request, 'trainer.html', {'treinador':treinador})
+		return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages})
 	else:
 		return render(request, 'index.html', {'erro' : "O e-mail ou a senha estão errados"})
 
@@ -97,8 +103,8 @@ def form_signup(request):
 	return render(request, 'index.html', {'sucesso': sucesso})
 	
 def form_signout(request):
-	request.session['trainer_id'] = None
-	print(request.session['trainer_id'])
+	del request.session['trainer_id']
+	print("Deslogou")
 	return render(request, 'index.html')
 	
 def Classify(image_data):

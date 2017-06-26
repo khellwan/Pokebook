@@ -54,6 +54,37 @@ class acesso_banco():
 		treinador = Treinador(row[0],row[1],row[3],row[4])
 		acesso_banco.cnxn.commit()
 		return treinador
+		
+	def get_friends(ref, current_trainer):
+		acesso_banco.cursor.execute("SELECT email, nome, img_perfil, cidade FROM Treinador, Amizades WHERE login_registrador='{0}' AND login_registrado = email".format(current_trainer))
+		row = acesso_banco.cursor.fetchall()
+		acesso_banco.cnxn.commit()
+		friendlist = []
+		for amigo in row:
+			friend = Treinador(row[0],row[1],row[2],row[3])
+			friendlist.append(friend)
+		return friendlist
+	
+	def get_friend_suggestions(ref, current_trainer):
+		acesso_banco.cursor.execute("SELECT email, nome, img_perfil, cidade FROM Treinador WHERE email NOT IN (SELECT login_registrado FROM Amizades WHERE login_registrador='{0}') AND email <> '{0}' ORDER BY nome".format(current_trainer))
+		trainers = acesso_banco.cursor.fetchall()
+		acesso_banco.cnxn.commit()
+		print("entrou aqui")
+		print(trainers)
+		suggestions=[]
+		#Ajusta pulos na lista de usuários que ainda não são amigos do usuário logado para fazer sugestões
+		jump=1
+		start=0
+		if(len(trainers) > 9):
+			jump=int(len(trainers)/9)
+			start=randint(0,len(trainers)%9)
+		for trainer in trainers[start::jump]:
+			print("Printando trainers. Start = " + str(start) + "Jump = " + str(jump))
+			print(trainer)
+			trainer = Treinador(trainer[0],trainer[1],trainer[2],trainer[3])
+			suggestions.append(trainer)
+		return suggestions
+			
 	
 	def get_trainer_pic(ref, current_trainer):
 		acesso_banco.cursor.execute("SELECT img_perfil FROM Treinador WHERE email = '{0}';".format(current_trainer))

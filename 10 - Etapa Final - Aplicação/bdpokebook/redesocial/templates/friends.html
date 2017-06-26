@@ -54,7 +54,7 @@
                  <div class="col-md-3">
                     
                      <div class="my-pic">
-                        <img src="{% static 'images/blog/ash.png' %}" alt="">
+                        <img src="{{ treinador.img_perfil }}" alt="">
                         <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
                          <div id="menu" class="collapse">
                            <ul class="menu-link">
@@ -68,7 +68,7 @@
                     	
                         <div class="white-spacing">
                             <h1>Treinador</h1>
-                            <span>Ash Ketchum</span>
+                            <span>{{ treinador.nome }}</span>
                         </div> 
 
                     </div>
@@ -78,75 +78,20 @@
 
                  <!-- Friend (Right Sidebar) Start -->
                  <div class="col-md-9">
+					<h1> Amigos <h1>
 					<div class="row">
-					
-						<!-- Friend 1 -->
+						{% for friend in amigos %}
 						<div class="col-md-4">
-							<img class="pokemon square" src="{% static 'images/blog/gary.png' %}" alt="">
+							<img class="pokemon square" src="{{ friend.img_perfil }}" alt="">
 							 <div class="my-detail">
 								<div class="white-spacing">
-							<h1>Gary Carvalho</h1>
+							<h1>{{ friend.nome }}</h1>
 							<span>Treinador</span>
 								</div> 
 							 </div>
 						</div>
-						
-						<!-- Friend 2 -->
-						<div class="col-md-4">
-							<img class="pokemon square" src="{% static 'images/blog/brockobama.png' %}" alt="">
-							<div class="my-detail">
-								<div class="white-spacing">
-							<h1>Brock Obama</h1>
-							<span>Treinador</span>
-								</div> 
-							 </div>
-						</div>
-						
-						<!-- Friend 3 -->
-						<div class="col-md-4">
-							<img class="pokemon square" src="{% static 'images/blog/misty.png' %}" alt="">
-							<div class="my-detail">
-								<div class="white-spacing">
-							<h1>Misty</h1>
-							<span>Treinador</span>
-								</div> 
-							 </div>
-						</div>
-					</div>
-				
-					<div class="row">
-					<!-- Friend 4 -->
-					<div class="col-md-4">
-						<img class="pokemon square" src="{% static 'images/blog/trainer.png' %}" alt="">
-						<div class="my-detail">
-							<div class="white-spacing">
-						<h1>Amigo</h1>
-						<span>Treinador</span>
-							</div> 
-						 </div>
-					</div>
+						{% endfor %}
 					
-					<!-- Friend 5 -->
-					<div class="col-md-4">
-						<img class="pokemon square" src="{% static 'images/blog/trainer.png' %}" alt="">
-						<div class="my-detail">
-							<div class="white-spacing">
-						<h1>Amigo</h1>
-						<span>Treinador</span>
-							</div> 
-						 </div>
-					</div>
-					
-					<!-- Friend 6 -->
-					<div class="col-md-4">
-						<img class="pokemon square" src="{% static 'images/blog/trainer.png' %}" alt="">
-						<div class="my-detail">
-							<div class="white-spacing">
-						<h1>Amigo</h1>
-						<span>Treinador</span>
-							</div> 
-						 </div>
-					</div>
 					
 					<!-- Load More -->
 					<div class="col-md-12 text-center">
@@ -154,6 +99,23 @@
 						<div id="portfolio-end-message"></div>
 					</div>
 					
+					</div>
+					<div class="row">
+						<h1> Sugestão de amigos <h1>
+						{% for trainer in sugestoes %}
+							<form action="trainer.html" method="get" name="friend">
+								<div class="col-md-4">
+									<img class="pokemon square" src="{{ trainer.img_perfil }}" alt="">
+									 <div class="my-detail">
+										<div class="white-spacing">
+									<h1>{{ trainer.nome }}</h1>
+									<span>Treinador</span>
+										</div> 
+									 </div>
+								</div>
+								<input name="email" type="hidden" value="{{ trainer.email }}"/>
+							</form>
+						{% endfor %}
 					</div>
                      <!-- Friend (Right Sidebar) End -->
                      
@@ -163,8 +125,8 @@
                           <footer>
                           <ul class="menu-link">
                                 <li><a href="index.html">Início</a></li>
-							   <li><a href="trainer.html">Treinador</a></li>
-                               <li><a href="pokemon.html">Pokémons</a></li>
+								<li><a href="trainer.html">Treinador</a></li>
+								<li><a href="pokemon.html">Pokémons</a></li>
                           </ul>
                           </footer>
                        </div>
