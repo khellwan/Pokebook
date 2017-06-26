@@ -109,7 +109,12 @@ class acesso_banco():
 			msg = Mensagem(m[0],m[1],m[2],m[3])
 			msg_list.append(msg)
 		return msg_list
-		
+
+	def delete_msg(ref, current_trainer, conteudo):
+		acesso_banco.cursor.execute("DELETE FROM Mensagem WHERE login_treinador = '{0}' AND conteudo = '{1}';".format(current_trainer, conteudo))
+		mensagem - acesso_banco.cursor.fetchall()
+		acesso_banco.cnxn.commit()
+		return
 		
 	def get_data_msg(ref, current_trainer):
 		acesso_banco.cursor.execute("SELECT data FROM Mensagem WHERE login_treinador = {0};".format(current_trainer))

@@ -42,14 +42,20 @@ def post_message(request):
 	current_trainer = request.session['trainer_id']
 	treinador = db_msg.get_trainer(current_trainer)
 	message_id = randint(0, 99999)
-	print("A mensagem é ")
-	print("'")
-	print(msg)
-	print("'")
-	print(msg != "None ")
-	if (msg):
+	if (msg and msg != " "):
 		db_msg.post_msg(message_id, current_trainer, msg)
 	messages = db_msg.get_msg(current_trainer)
+	return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
+	
+def delete_message(request):
+	db_msg = classes.acesso_banco()
+	messages = db_msg.get_msg(current_trainer)
+	msg = messages.conteudo
+	current_trainer = request.session['trainer_id']
+	treinador = db_msg.get_trainer(current_trainer)
+	print("The message is: ")
+	print(msg)
+	db_msg.delete_msg(current_trainer, msg)
 	return render(request, 'trainer.html', {'treinador' : treinador, 'mensagens':messages})
 	
 def quest(request):
@@ -72,7 +78,7 @@ def trainer(request):
 	if (request.method=="GET" and request.name=="friend"):
 		current_trainer = request.GET.get('email')
 	else:
-		current_trainer = request.session['trainer_id']	
+		current_trainer = request.session['trainer_id']
 	db_trainer = classes.acesso_banco()
 	treinador = db_trainer.get_trainer(current_trainer)
 	messages = db_trainer.get_msg(current_trainer)

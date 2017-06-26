@@ -102,6 +102,11 @@
 									{% for msg in mensagens %}
 									<div class="post-info">
 										<span>{{ msg.data_postagem }} / por <a href="#" target="_blank">{{ msg.login_treinador }}</a></span>
+										<form action="delete_message" method="post" role="form>
+											<button type="submit" class="btn btn-danger btn-sm">
+												<span class="glyphicon glyphicon-remove"></span> 
+											</button>
+										</form>
 									</div>  
 									<p>{{ msg.conteudo }}</p>                          			
 									{% endfor %}
