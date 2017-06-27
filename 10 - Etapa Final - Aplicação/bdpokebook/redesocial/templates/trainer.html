@@ -57,16 +57,16 @@
 							   <li><form action="form_signout" method="post" role="form">{% csrf_token %}
 									<button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-log-out"></span> Log out</button>
 							   </form></li>
-							   {% elif not_friend %}
+							   {% elif is_friend %}
+							   <!-- Remove friend -->
+							   <li><form action="remove_friend" method="post" role="form">{% csrf_token %}
+									<button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-minus"></span> Remover amigo</button>
+									<input type="hidden" value="{{ treinador.login }}" name="email"/>
+							   </form></li>							   
+							   {% else %}
 							   <!-- Add friend -->
 							   <li><form action="add_friend" method="post" role="form">{% csrf_token %}
 									<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Adicionar amigo</button>
-									<input type="hidden" value="{{ treinador.login }}" name="email"/>
-							   </form></li>
-							   {% else %}
-							   <!-- Remove friend -->
-							   <li><form action="remove_friend" method="post" role="form">{% csrf_token %}
-									<button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-plus"></span> Remover amigo</button>
 									<input type="hidden" value="{{ treinador.login }}" name="email"/>
 							   </form></li>
 							   {% endif %}

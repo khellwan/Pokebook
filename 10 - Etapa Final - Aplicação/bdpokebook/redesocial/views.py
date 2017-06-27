@@ -29,12 +29,6 @@ def pokemon(request):
 	pokemons = db_pokemon.get_pokemons_by_trainer(current_trainer)
 	#pokemon = db_pokemon.get_pokemons_by_trainer(id, especie, treinador, tipo, regiao, img, nivel, apelido)
 	return render(request, 'pokemon.html', {'treinador':treinador, "pokemons" : pokemons})
-
-def old_messages(request):
-	db_msg = classes.acesso_banco()
-	current_trainer = request.session['trainer_id']
-	messages = db_msg.get_msg(current_trainer)
-	return render(request, 'trainer.html', {'mensagens' : messages})
 	
 def post_message(request):
 	db_msg = classes.acesso_banco()
@@ -84,9 +78,9 @@ def add_friend(request):
 	db_trainer.add_friend(login_registrador, login_registrado)
 	treinador = db_trainer.get_trainer(login_registrado)
 	messages = db_trainer.get_msg(login_registrado)
-	not_friend = False
+	is_friend = True
 	own_account = False
-	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'not_friend':not_friend})
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'is_friend':is_friend})
 	
 def remove_friend(request):
 	login_registrador = request.session['trainer_id']
@@ -95,9 +89,9 @@ def remove_friend(request):
 	db_trainer.remove_friend(login_registrador, login_registrado)
 	treinador = db_trainer.get_trainer(login_registrado)
 	messages = db_trainer.get_msg(login_registrado)
-	not_friend = True
+	is_friend = False
 	own_account = False
-	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'not_friend':not_friend})
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'is_friend':is_friend})
 	
 def trainer(request):
 	if (request.method=="GET" and request.GET.get('email')):
@@ -107,14 +101,10 @@ def trainer(request):
 		current_trainer = request.session['trainer_id']
 		own_account = True
 	db_trainer = classes.acesso_banco()
-	amigos = db_trainer.get_friends(current_trainer)
-	if not amigos:
-		not_friend = True
-	else:
-		not_friend = False
+	is_friend = db_trainer.check_friendship(request.session['trainer_id'], current_trainer)
 	treinador = db_trainer.get_trainer(current_trainer)
 	messages = db_trainer.get_msg(current_trainer)
-	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'not_friend':not_friend})
+	return render(request, 'trainer.html', {'treinador':treinador, 'mensagens':messages, 'own_account':own_account, 'is_friend':is_friend})
 
 def form_signin(request):
 	email = request.POST.get('email')

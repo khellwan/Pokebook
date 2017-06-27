@@ -27,6 +27,14 @@ class acesso_banco():
 			print("O e-mail e/ou a senha esta/ao errados")
 			return False
 	
+	def check_friendship(ref, eu, vc):
+		acesso_banco.cursor.execute("SELECT * FROM Amizades WHERE login_registrador= '{0}' AND login_registrado='{1}';".format(eu, vc))
+		is_friend = acesso_banco.cursor.fetchall()
+		acesso_banco.cnxn.commit()
+		if is_friend:
+			return True
+		return False
+	
 	def create_trainer(ref, email, nome, senha, confirma_senha, img_perfil, cidade):
 		#print(email, nome, senha, confirma_senha, img_perfil, cidade, acesso_banco.username)
 		if (senha != confirma_senha):
@@ -73,7 +81,7 @@ class acesso_banco():
 		acesso_banco.cnxn.commit()
 		friendlist = []
 		for amigo in row:
-			friend = Treinador(row[0],row[1],row[2],row[3])
+			friend = Treinador(amigo[0],amigo[1],amigo[2],amigo[3])
 			friendlist.append(friend)
 		return friendlist
 	
