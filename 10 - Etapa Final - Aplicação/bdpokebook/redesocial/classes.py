@@ -165,8 +165,8 @@ class acesso_banco():
 		
 		
 	
-	def atribuir_pokemon(id, treinador, especie, ref):
-		acesso_banco.cursor.execute("INSERT INTO pokemon VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');" .format(id, especie, treinador, "elétrico", "nsei", "IMG", 1, "Pikachu"))
+	def atribuir_pokemon(ref, id, especie, treinador):
+		acesso_banco.cursor.execute("INSERT INTO pokemon VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');" .format(id, especie, treinador, "elétrico", "kanto", "https://cdn.bulbagarden.net/upload/thumb/0/0d/025Pikachu.png/250px-025Pikachu.png", 1, "Pikachu"))
 		print("Inserido com sucesso!")
 		acesso_banco.cnxn.commit()
 		return

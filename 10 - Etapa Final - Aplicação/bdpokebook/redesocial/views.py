@@ -68,11 +68,11 @@ def quest(request):
 		pokemon_quest = db_quest.get_pokemon_quest()
 		#String pokemon = new String(texto, "UTF-8");
 		if (pokemon_quest == texto.decode("utf-8")):
-			mensagem = "Detectamos que você está de olho em um " + pokemon_quest + ", você deu sorte, conseguiu pega-lo!!"
+			mensagem = "Parece que você está de olho em um " + texto.decode("utf-8") + ", você deu sorte, conseguiu pega-lo!!"
 			message_id = randint(0, 99999)
 			db_quest.atribuir_pokemon(message_id, pokemon_quest, current_trainer)
 		else:
-			mensagem =  "Detectamos que você está de olho em um " + pokemon_quest  + ", que pena, hoje ele não está afim de lutar e fugiu..."
+			mensagem =  "Parece que você está de olho em um " + texto.decode("utf-8")  + ", que pena, hoje ele não está afim de lutar e fugiu..."
 		return render(request, 'quest.html', {
 			'uploaded_file_url': uploaded_file_url, 'mensagem': mensagem
 		})
