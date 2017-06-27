@@ -154,6 +154,24 @@ class acesso_banco():
 		print("Inserido com sucesso!")
 		return
 		
+	def get_pokemon_quest(ref):
+		now = timezone.now()
+		data = now.strftime('%Y-%m-%d %H:%M:%S')
+		acesso_banco.cursor.execute("SELECT parametro FROM missao WHERE data_de_termino > '{0}';".format(data))
+		row = acesso_banco.cursor.fetchone()
+		acesso_banco.cnxn.commit()
+		pokemon_name = row[0]
+		return pokemon_name
+		
+		
+	
+	def atribuir_pokemon(id, treinador, especie, ref):
+		acesso_banco.cursor.execute("INSERT INTO pokemon VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');" .format(id, especie, treinador, "elétrico", "nsei", "IMG", 1, "Pikachu"))
+		print("Inserido com sucesso!")
+		acesso_banco.cnxn.commit()
+		return
+
+
 	
 class Pokemon:
 	def __init__(self, apelido, especie, tipo, regiao, estado_evolucao, img, nivel, treinador):

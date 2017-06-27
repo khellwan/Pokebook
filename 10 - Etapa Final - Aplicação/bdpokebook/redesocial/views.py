@@ -63,8 +63,18 @@ def quest(request):
 		uploaded_file_url = fs.url(filename)
 		imagem = open(uploaded_file_url, 'rb').read()
 		texto = Classify(imagem)
+		db_quest = classes.acesso_banco()
+		current_trainer = request.session['trainer_id']
+		pokemon_quest = db_quest.get_pokemon_quest()
+		#String pokemon = new String(texto, "UTF-8");
+		if (pokemon_quest == texto.decode("utf-8")):
+			mensagem = "Detectamos que você está de olho em um " + pokemon_quest + ", você deu sorte, conseguiu pega-lo!!"
+			message_id = randint(0, 99999)
+			db_quest.atribuir_pokemon(message_id, pokemon_quest, current_trainer)
+		else:
+			mensagem =  "Detectamos que você está de olho em um " + pokemon_quest  + ", que pena, hoje ele não está afim de lutar e fugiu..."
 		return render(request, 'quest.html', {
-			'uploaded_file_url': uploaded_file_url, 'texto': texto
+			'uploaded_file_url': uploaded_file_url, 'mensagem': mensagem
 		})
 	return render(request, 'quest.html')
 
