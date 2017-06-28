@@ -1,0 +1,5 @@
+> Os arquivos fonte estão dentro da pasta "bdpokebook\redesocial\". O arquivo views.py contém as funções que compõe o website. O arquivo classes.py contém as funções de acesso ao banco.
+
+> Os arquivos da pasta "bdpokebook\redesocial\templates" contém os HTMLs da aplicação.
+
+> Os demais arquivos são para o funcionamento da aplicação no Django.
