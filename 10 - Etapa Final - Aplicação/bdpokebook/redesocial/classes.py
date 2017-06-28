@@ -52,8 +52,8 @@ class acesso_banco():
 		acesso_banco.cnxn.commit()
 		pokelist = []
 		for poke in pokemon:
-			pkmn = Pokemon(poke[0], poke[1], poke[2], poke[3], poke[4], poke[5], poke[6], poke[7]) 
-			pokelist.append(pokemon)
+			pkmn = Pokemon(poke[0], poke[1], poke[2], poke[3], poke[4], poke[5], poke[6], poke[7])
+			pokelist.append(pkmn)
 		return pokelist
 		
 	def get_trainer(ref, current_trainer):
@@ -174,12 +174,12 @@ class acesso_banco():
 
 	
 class Pokemon:
-	def __init__(self, apelido, especie, tipo, regiao, estado_evolucao, img, nivel, treinador):
+	def __init__(self, id, especie, treinador, tipo, regiao, img, nivel, apelido):
 		self.apelido = apelido
 		self.especie = especie
 		self.tipo = tipo
 		self.regiao = regiao
-		self.estado_evolucao = estado_evolucao
+		self.id = id
 		self.img = img
 		self.nivel = nivel
 		self.treinador = treinador
